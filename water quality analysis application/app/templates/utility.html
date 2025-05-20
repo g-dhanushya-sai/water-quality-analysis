@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Water Utility Analysis</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 30px;
+        }
+
+        /* Button container */
+        .box {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 250px;
+        }
+
+        /* Styled buttons */
+        button {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            color: white;
+            background-color: #176192;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0f4c75;
+            transform: translateY(-3px);
+        }
+
+        button span {
+            position: relative;
+            transition: padding-right 0.3s;
+        }
+
+        button span::after {
+            content: ' »';
+            position: absolute;
+            opacity: 0;
+            right: -20px;
+            transition: opacity 0.3s, right 0.3s;
+        }
+
+        button:hover span {
+            padding-right: 15px;
+        }
+
+        button:hover span::after {
+            opacity: 1;
+            right: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="box">
+            <form action="{{ url_for('util_quantity') }}" method="post">
+                <button type="submit"><span>Quantity analysis</span></button>
+            </form>
+            <form action="{{ url_for('util_quality') }}" method="post">
+                <button type="submit"><span>Quality analysis</span></button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Developed by Dhanushya Sai G, Varnika Ramesh, Vedhashri K. All rights reserved.
+    </footer>
+</body>
+</html>

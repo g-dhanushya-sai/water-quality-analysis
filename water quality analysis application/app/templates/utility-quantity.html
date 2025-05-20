@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Utility Water Quantity Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #ffffff;
+            color: #333;
+        }
+        h2 {
+            color: #2a4d69;
+            margin-bottom: 20px;
+        }
+        form, .results {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        select, button {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #2a4d69;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        select:focus, button:hover {
+            border-color: #145DA0;
+            cursor: pointer;
+        }
+        button {
+            background-color: #176192;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0f4c75;
+            transform: translateY(-2px);
+        }
+        .alerts {
+            margin-top: 20px;
+        }
+        .alerts h3 {
+            color: #2a4d69;
+            margin-bottom: 10px;
+        }
+        .alerts p {
+            background: #f0f8ff;
+            padding: 10px;
+            border-left: 4px solid #2a4d69;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h2>Water Usage Quantity Analysis</h2>
+
+    <form method="POST">
+        <label for="year">Select Year:</label>
+        <select name="year" id="year" required>
+            {% for year in years %}
+                <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if alerts %}
+        <div class="alerts">
+            <h3>Alerts &amp; Recommendations:</h3>
+            {% for alert in alerts %}
+                <p>{{ alert }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if plot_path %}
+        <div class="results">
+            <img src="{{ url_for('static', filename=plot_path.split('/')[-1]) }}" alt="Water Usage Plot" />
+        </div>
+    {% endif %}
+</body>
+</html>
